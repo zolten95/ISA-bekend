@@ -56,13 +56,12 @@ public class KorisnikController {
         }
         String enkriptovana = passwordEncoder.encode(korisnik.getSifra());
         if(!passwordEncoder.matches(loginDTO.getSifra(), enkriptovana)) {
-            return ResponseEntity.ok( HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>( HttpStatus.UNAUTHORIZED);
         }
-        /*
         if (!korisnik.isPotvrdjen()){
-            return  ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-        }
-        */
+            return new ResponseEntity<>( HttpStatus.UNAUTHORIZED);
+         }
+
         String token = tokenUtils.generateToken(korisnik.getEmail(), korisnik.getRole());
         LoginResDTO responseDTO = new LoginResDTO();
         responseDTO.setToken(token);
