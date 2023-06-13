@@ -35,13 +35,13 @@ public class KorisnikServiceImpl implements KorisnikService {
         String uniqueToken = generateToken();
         emailDetails.setRecipient(registracijaDTO.getEmail());
         emailDetails.setSubject("Confirmation email");
-        String tokenForUser = "http://localhost:8080/api/emailConfirm/confirm/" + emailDetails.getRecipient() + "/" + uniqueToken;
+        String tokenForUser = "http://localhost:8080/api/email/potvrdiNalog/" + emailDetails.getRecipient() + "/" + uniqueToken;
         emailDetails.setMsgBody(tokenForUser);
         emailService.sendConfirmationMail(emailDetails);
 
         Korisnik korisnik = RegistracijaDTO.Konvertuj(registracijaDTO);
         korisnik.setTipKorisnika(TipKorisnika.RegistrovaniKorisnik);
-
+        korisnik.setTokenZaPotvrdu(uniqueToken);
         korisnik = korisnikRepository.save(korisnik);
 
         return korisnik;
