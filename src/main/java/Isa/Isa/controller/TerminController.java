@@ -41,7 +41,6 @@ public class TerminController {
         }
 
         Termin termin = t.get();
-
         return new ResponseEntity<>(termin, HttpStatus.OK);
     }
 
