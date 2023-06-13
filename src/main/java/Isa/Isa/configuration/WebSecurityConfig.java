@@ -68,13 +68,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
     }
 
-    //menjaj ovo u svoje endpointe
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(HttpMethod.POST, "/api/korisnik/login", "/api/korisnik/registracija",
-                "/api/emailConfirm/sendMail");
-        web.ignoring().antMatchers(HttpMethod.GET, "/", "api/medical/getAll",
-                "/api/emailConfirm/confirm/{email}/{confirmToken}");
+                "/api/email/sendMail");
+        web.ignoring().antMatchers(HttpMethod.GET, "/",
+                "/api/email/potvrdiNalog/**");
         web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
     }
 }
